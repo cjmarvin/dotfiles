@@ -1,0 +1,164 @@
+
+"==================[ Vundle ]============================
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tComment'
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'vim-scripts/CycleColor'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-colorscheme-switcher'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'klen/python-mode'
+" Plugin 'chrisbra/vim-diff-enhanced'
+
+call vundle#end()
+filetype plugin indent on
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append'!' to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append '!' to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append '!' to auto
+"                     approve removal
+" =======================================================
+
+syntax enable       "Enable syntax processing
+
+set tabstop=4       "Number of visual spaces per <TAB>
+set softtabstop=4   "Number of spaces in tab when editing
+set shiftwidth=4
+set shiftround      "Always indent/outdent to nearest tabstop
+set smarttab        "Use shiftwidths at left margin, tabstops everywhere else
+set expandtab       "Tabs are spaces
+
+set number          "Show line numbers
+set showcmd         "Show command in bottom bar
+set cursorline      "Hightlight current line
+set ttyfast         "Faster scrolling
+set ruler
+" set hidden          "Open new buffer without saving current buffer
+"set undofile       "Undo even after exiting and reopening vim
+
+filetype plugin on  "Load plugins
+set wildmenu        "Visual autocomplete for command menu
+set wildmode=list:longest
+set showmatch       "Highlight matching [{( )}]
+set incsearch       "Lookahead search as characters are entered
+set hlsearch        "Highlight all matches
+set ignorecase      "Ignore case in all searches
+set smartcase       "   unless uppercase letters used
+
+autocmd BufEnter *.c set sw=2 ts=2 sts=2
+autocmd FileType make set noexpandtab ts=8 sw=8 sts=8
+
+"Split windows to the right and to the bottom
+set splitright
+set splitbelow
+
+"====[ Make arrow keys move visual blocks around ]=====================
+" runtime plugin/dragvisuals.vim
+" vmap <expr> <LEFT>  DVB_Drag('left')
+" vmap <expr> <RIGHT> DVB_Drag('right')
+" vmap <expr> <DOWN>  DVB_Drag('down')
+" vmap <expr> <UP>    DVB_Drag('up')
+" vmap <expr> D       DVB_Duplicate()
+" vmap <expr> <C-D>   DVB_Duplicate()
+" " Remove any introduced trailing whitespace after moving...
+" let g:DVB_TrimWS = 1
+
+
+" Use space to jump down a page (like browsers do)...
+" nnoremap <Space> <PageDown>
+" vnoremap <Space> <PageDown>
+
+"====[ Show when lines extend past column 80 ]========================
+highlight ColorColumn ctermbg=magenta
+function! MarkMargin (on)
+    if exists('b:MarkMargin')
+        try
+            call matchdelete(b:MarkMargin)
+        catch /./
+        endtry
+        unlet b:MarkMargin
+    endif
+    if a:on
+        let b:MarkMargin = matchadd('ColorColumn', '\%81v', 100)
+    endif
+endfunction
+
+augroup MarkMargin
+    autocmd!
+    autocmd  BufEnter *     :call MarkMargin(1)
+    autocmd  BufEnter *.vp* :call MarkMargin(0)
+augroup END
+"===============================================================================
+
+let mapleader = ","
+
+"Remove all trailing whitespace upon saving
+autocmd BufWritePre *py,*c :%s/\s\+$//e
+
+"Unsets the last search pattern by hitting return
+nnoremap <CR> :noh<CR><CR>
+
+"====================================[ relative numbers ]=======================
+" toggle between relative line numbers
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+" relative in normal mode; absolute in insert mode
+" autocmd InsertEnter * :set number
+" autocmd InsertLeave * :set relativenumber
+"===============================================================================
+
+"======================[ moving lines and selections ]==========================
+nnoremap <c-k> :m-2<cr>==
+nnoremap <c-j> :m+<cr>==
+inoremap <c-j> <esc>:m+<cr>==gi
+inoremap <c-k> <esc>:m-2<cr>==gi
+vnoremap <c-j> :m'>+<cr>gv=gv
+vnoremap <c-k> :m-2<cr>gv=gv
+
+inoremap jk <Esc>
+nnoremap ; :
+
+" insert new line
+nmap oo o<esc>k
+nmap OO O<esc>j
+
+"===============================================================================
+
+"====================[Powerline ]==============================
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+" let g:Powerline_symbols = 'compatible'
+" let g:Powerline_cache_enabled = 1
+" set encoding=utf-8
+" set termencoding=utf-8
+" set term=xterm-256color
+" set t_Co=256
+" set fillchars+=stl:\ ,stlnc:\
+" set rtp+=/Users/Library/Fonts
+set laststatus=2
+
+
+"=====================[ CtrlP ]=====================
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_custom_ignore = {
+    " \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    " \ 'file': '\v\.(exe|so|dll)$',
+    " \ }
