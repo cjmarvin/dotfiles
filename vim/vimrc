@@ -40,7 +40,7 @@ set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
 set ttyfast         "Faster scrolling
 set ruler
-set timeoutlen=1000 ttimeoutlen=100  "Typing timeout
+set timeoutlen=1000 ttimeoutlen=10  "Typing timeout
 " set hidden          "Open new buffer without saving current buffer
 "set undofile       "Undo even after exiting and reopening vim
 
@@ -98,7 +98,7 @@ augroup MarkMargin
 augroup END
 "===============================================================================
 
-let mapleader = ","
+let mapleader = " "
 
 "Remove all trailing whitespace upon saving
 autocmd BufWritePre *py,*c :%s/\s\+$//e
