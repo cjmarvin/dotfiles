@@ -40,6 +40,7 @@ set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
 set ttyfast         "Faster scrolling
 set ruler
+set timeoutlen=1000 ttimeoutlen=100  "Typing timeout
 " set hidden          "Open new buffer without saving current buffer
 "set undofile       "Undo even after exiting and reopening vim
 
@@ -127,15 +128,17 @@ nnoremap <c-k> :m-2<cr>==
 nnoremap <c-j> :m+<cr>==
 inoremap <c-j> <esc>:m+<cr>==gi
 inoremap <c-k> <esc>:m-2<cr>==gi
-vnoremap <c-j> :m'>+<cr>gv=gv
-vnoremap <c-k> :m-2<cr>gv=gv
+" vnoremap <c-j> :m'>+<cr>gv=gv
+" vnoremap <c-k> :m-2<cr>gv=gv
+vnoremap <c-j> :m'>+<cr>gv
+vnoremap <c-k> :m-2<cr>gv
 
 inoremap jk <Esc>
 nnoremap ; :
 
-" insert new line
-nmap oo o<esc>k
-nmap OO O<esc>j
+" insert new line - THIS MAKES o and O slow!
+" nmap oo o<esc>k
+" nmap OO O<esc>j
 
 "===============================================================================
 
