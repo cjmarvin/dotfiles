@@ -50,6 +50,7 @@ set smartindent
 set cindent
 set scrolloff=5     " always show n lines above or below cursor
 
+set relativenumber  " set relative line number
 set number          "Show line numbers
 set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
