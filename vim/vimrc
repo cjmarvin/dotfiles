@@ -45,6 +45,10 @@ set shiftwidth=4
 set shiftround      "Always indent/outdent to nearest tabstop
 set smarttab        "Use shiftwidths at left margin, tabstops everywhere else
 set expandtab       "Tabs are spaces
+set autoindent
+set smartindent
+set cindent
+set scrolloff=5     " always show n lines above or below cursor
 
 set number          "Show line numbers
 set showcmd         "Show command in bottom bar
@@ -189,4 +193,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
     " \ 'file': '\v\.(exe|so|dll)$',
     " \ }
 
-
+" Use \ to search for conflicts in files
+function! FindConflict()
+    try
+        /<<<<<<<
+    catch
+    endtry
+endfunction
+nnoremap \ :call FindConflict()<CR>
