@@ -24,6 +24,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'chrisbra/vim-diff-enhanced'
 " Plugin 'vim-scripts/matrix.vim'
 " Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plugin 'stephpy/vim-yaml'
 
 call vundle#end()
 filetype plugin indent on
