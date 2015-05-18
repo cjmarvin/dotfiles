@@ -7,6 +7,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tComment'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'bling/vim-airline'
 " Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -49,10 +50,12 @@ set number          "Show line numbers
 set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
 set ttyfast         "Faster scrolling
+set lazyredraw
 set ruler
 set timeoutlen=1000 ttimeoutlen=10  "Typing timeout
 " set hidden          "Open new buffer without saving current buffer
 "set undofile       "Undo even after exiting and reopening vim
+" set re=1            " old regex (doesn't work before 7.4)
 
 filetype plugin on  "Load plugins
 set wildmenu        "Visual autocomplete for command menu
