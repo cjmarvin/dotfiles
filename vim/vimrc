@@ -8,13 +8,22 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tComment'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
 " Plugin 'vim-scripts/CycleColor'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-colorscheme-switcher'
+" Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'wellle/targets.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'klen/python-mode'
 " Plugin 'chrisbra/vim-diff-enhanced'
+" Plugin 'vim-scripts/matrix.vim'
+" Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
@@ -139,6 +148,9 @@ nnoremap ; :
 " insert new line - THIS MAKES o and O slow!
 " nmap oo o<esc>k
 " nmap OO O<esc>j
+
+" molokai original color scheme
+let g:molokai_original = 1
 
 "===============================================================================
 
