@@ -7,7 +7,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tComment'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'Lokaltog/vim-easymotion'
 Plugin 'bling/vim-airline'
 " Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -19,7 +19,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'wellle/targets.vim'
-Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'klen/python-mode'
 " Plugin 'chrisbra/vim-diff-enhanced'
@@ -38,7 +38,6 @@ filetype plugin indent on
 " =======================================================
 
 syntax enable       "Enable syntax processing
-
 set tabstop=4       "Number of visual spaces per <TAB>
 set softtabstop=4   "Number of spaces in tab when editing
 set shiftwidth=4
@@ -49,8 +48,9 @@ set autoindent
 set smartindent
 set cindent
 set scrolloff=5     " always show n lines above or below cursor
-
-set relativenumber  " set relative line number
+if v:version >= 704
+    set relativenumber  " set relative line number
+endif
 set number          "Show line numbers
 set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
@@ -168,7 +168,11 @@ nnoremap ; :
 " molokai original color scheme
 let g:molokai_original = 1
 
-"===============================================================================
+"=======================[ surround ]============================================
+" lets you surround words with only 'sw)'
+nmap s ysi
+nmap S ysa
+nmap s$ ys$
 
 "====================[Powerline ]==============================
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
