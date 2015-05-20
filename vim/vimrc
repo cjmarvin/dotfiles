@@ -73,9 +73,9 @@ set smartcase       "   unless uppercase letters used
 
 " autocmd BufEnter *.c set sw=2 ts=2 sts=2
 autocmd FileType make set noexpandtab ts=8 sw=8 sts=8
-" autocmd BufNewFile,BufRead *.tex set spell sw=2 ts=2 sts=2
+autocmd BufNewFile,BufRead *.tex set sw=2 ts=2 sts=2 "spell
 autocmd FileType *.c set sw=2 ts=2 sts=2
-autocmd FileType *.tex set spell sw=2 ts=2 sts=2
+" autocmd FileType *.tex set spell sw=2 ts=2 sts=2
 
 "Split windows to the right and to the bottom
 set splitright
@@ -159,7 +159,8 @@ vnoremap <c-j> :m'>+<cr>gv
 vnoremap <c-k> :m-2<cr>gv
 
 inoremap jk <Esc>
-nnoremap ; :
+" nnoremap ; :
+nnoremap , :
 
 " insert new line - THIS MAKES o and O slow!
 " nmap oo o<esc>k
