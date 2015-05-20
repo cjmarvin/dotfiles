@@ -47,10 +47,10 @@ set expandtab       "Tabs are spaces
 set autoindent
 set smartindent
 set cindent
-set scrolloff=5     " always show n lines above or below cursor
-if v:version >= 704
-    set relativenumber  " set relative line number
-endif
+set scrolloff=20     " always show n lines above or below cursor
+" if v:version >= 704
+"     set relativenumber  " set relative line number
+" endif
 set number          "Show line numbers
 set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
@@ -123,7 +123,8 @@ augroup MarkMargin
 augroup END
 "===============================================================================
 
-let mapleader = " "
+" let mapleader = "\<Space>"
+let mapleader =" "
 
 "Remove all trailing whitespace upon saving
 autocmd BufWritePre *py,*c :%s/\s\+$//e
@@ -134,13 +135,12 @@ nnoremap <CR> :noh<CR><CR>
 "====================================[ relative numbers ]=======================
 " toggle between relative line numbers
 function! NumberToggle()
-    if(&relativenumber == 1)
-        set number
-    else
+    if(&relativenumber == 0)
         set relativenumber
+    else
+        set norelativenumber
     endif
 endfunc
-
 nnoremap <C-n> :call NumberToggle()<cr>
 
 " relative in normal mode; absolute in insert mode
