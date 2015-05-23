@@ -26,6 +26,7 @@ Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'vim-scripts/matrix.vim'
 " Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'stephpy/vim-yaml'
+" Plugin 'chrisbra/csv.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -45,19 +46,16 @@ set shiftround      "Always indent/outdent to nearest tabstop
 set smarttab        "Use shiftwidths at left margin, tabstops everywhere else
 set expandtab       "Tabs are spaces
 set autoindent
-set smartindent
-set cindent
-set scrolloff=20     " always show n lines above or below cursor
-" if v:version >= 704
-"     set relativenumber  " set relative line number
-" endif
+set scrolloff=10     " always show n lines above or below cursor
 set number          "Show line numbers
 set showcmd         "Show command in bottom bar
 set cursorline      "Hightlight current line
 set ttyfast         "Faster scrolling
 set lazyredraw
 set ruler
-set timeoutlen=1000 ttimeoutlen=10  "Typing timeout
+set timeoutlen=1000
+set ttimeout
+set ttimeoutlen=100  "Typing timeout
 " set hidden          "Open new buffer without saving current buffer
 "set undofile       "Undo even after exiting and reopening vim
 " set re=1            " old regex (doesn't work before 7.4)
@@ -70,10 +68,12 @@ set incsearch       "Lookahead search as characters are entered
 set hlsearch        "Highlight all matches
 set ignorecase      "Ignore case in all searches
 set smartcase       "   unless uppercase letters used
+set backspace=indent,eol,start  " Fix delete not working in insert mode
 
 " autocmd BufEnter *.c set sw=2 ts=2 sts=2
 autocmd FileType make set noexpandtab ts=8 sw=8 sts=8
-autocmd BufNewFile,BufRead *.tex set sw=2 ts=2 sts=2 "spell
+" autocmd BufNewFile,BufRead *.tex set sw=2 ts=2 sts=2 inoremap { {}<left> "spell
+" autocmd BufNewFile,BufRead *.tex set filetype=tex
 autocmd FileType *.c set sw=2 ts=2 sts=2
 " autocmd FileType *.tex set spell sw=2 ts=2 sts=2
 
@@ -175,16 +175,25 @@ nmap s ysi
 nmap S ysa
 nmap s$ ys$
 
+" auto close brackets, parentheses, etc.
+" inoremap { {}<Left>
+" inoremap ' ''<Left>
+" inoremap " ""<Left>
+" inoremap ( ()<Left>
+"
 "====================[Powerline ]==============================
-" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
 " let g:Powerline_symbols = 'compatible'
 " let g:Powerline_cache_enabled = 1
-" set encoding=utf-8
-" set termencoding=utf-8
+" let g:airline_enable = 1
+let g:airline_powerline_fonts=1
+set encoding=utf-8
+set termencoding=utf-8
 " set term=xterm-256color
-" set t_Co=256
-" set fillchars+=stl:\ ,stlnc:\
-" set rtp+=/Users/Library/Fonts
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set rtp+=/Users/Library/Fonts
 set laststatus=2
 
 
@@ -207,3 +216,6 @@ function! FindConflict()
     endtry
 endfunction
 nnoremap \ :call FindConflict()<CR>
+
+" for projects
+nnoremap <leader>m :!make<cr>
