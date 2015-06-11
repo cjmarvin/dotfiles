@@ -27,6 +27,7 @@ Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'stephpy/vim-yaml'
 " Plugin 'chrisbra/csv.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin indent on
@@ -69,6 +70,7 @@ set hlsearch        "Highlight all matches
 set ignorecase      "Ignore case in all searches
 set smartcase       "   unless uppercase letters used
 set backspace=indent,eol,start  " Fix delete not working in insert mode
+set pastetoggle=<F2>
 
 " autocmd BufEnter *.c set sw=2 ts=2 sts=2
 autocmd FileType make set noexpandtab ts=8 sw=8 sts=8
@@ -112,7 +114,7 @@ function! MarkMargin (on)
         unlet b:MarkMargin
     endif
     if a:on
-        let b:MarkMargin = matchadd('ColorColumn', '\%81v', 100)
+        let b:MarkMargin = matchadd('ColorColumn', '\%80v', 100)
     endif
 endfunction
 
@@ -158,16 +160,13 @@ inoremap <c-k> <esc>:m-2<cr>==gi
 vnoremap <c-j> :m'>+<cr>gv
 vnoremap <c-k> :m-2<cr>gv
 
-inoremap jk <Esc>
+inoremap jk <Esc>l
 " nnoremap ; :
 nnoremap , :
 
 " insert new line - THIS MAKES o and O slow!
 " nmap oo o<esc>k
 " nmap OO O<esc>j
-
-" molokai original color scheme
-let g:molokai_original = 1
 
 "=======================[ surround ]============================================
 " lets you surround words with only 'sw)'
@@ -219,3 +218,23 @@ nnoremap \ :call FindConflict()<CR>
 
 " for projects
 nnoremap <leader>m :!make<cr>
+
+" molokai original color scheme
+colorscheme default
+let g:molokai_original = 1
+set background=dark
+
+" =====================[ indent-guides ]=================
+let g:indent_guides_auto_colors = 0
+" let g:indent_guides_auto_colors = 1
+" hi IndentGuidesOdd  ctermbg=black           " dark background
+" hi IndentGuidesEven ctermbg=darkgrey        " dark background
+hi IndentGuidesOdd  ctermbg=darkgrey         " light background
+hi IndentGuidesEven ctermbg=darkgrey     " light background
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+
