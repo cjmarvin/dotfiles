@@ -11,7 +11,7 @@
 
 * ###Git
 
-  Create a file `~/.gitemail` which contains:
+  Create a file `~/.git-user` which contains:
   ```
   [user]
       name = <name>
