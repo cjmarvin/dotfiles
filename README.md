@@ -1,15 +1,18 @@
 # dotfiles
 
-* Setup Vundle and install Vim plugins
+* ###Setup Vundle and install Vim plugins
   
-    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
+  ```
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+  ```
 
 
-* Git
+* ###Git
 
   Create a file `~/.gitemail` which contains:
-    
-    [user]
-        name = <name>
-        email = <email>
+  ```
+  [user]
+      name = <name>
+      email = <email>
+  ```
