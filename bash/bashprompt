@@ -30,5 +30,5 @@ set_prompt () {
         PS1+="$Red$FancyX"
     fi
     PS1+="$Grey) "
-    PS1+="\$ $Reset"
+    PS1+="$IGreen\$ $Reset"
     }
