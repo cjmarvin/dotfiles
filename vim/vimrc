@@ -167,6 +167,11 @@ nnoremap , :
 " insert new line - THIS MAKES o and O slow!
 " nmap oo o<esc>k
 " nmap OO O<esc>j
+"
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
 
 "=======================[ surround ]============================================
 " lets you surround words with only 'sw)'
