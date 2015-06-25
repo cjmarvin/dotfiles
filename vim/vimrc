@@ -1,11 +1,11 @@
 " ============================================================================
 " ========================== [ vim-plug ] ====================================
 " automatic installation
-" if empty(glob('~/.vim/autoload/plug.vim'))
-"   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-"     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"   autocmd VimEnter * PlugInstall
-" endif
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
 
 call plug#begin()
 " Plug 'gmarik/Vundle.vim'
@@ -22,6 +22,8 @@ Plug 'tpope/vim-markdown'
 " Plugin 'vim-scripts/CycleColor'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
+" Plugin 'xolox/vim-misc'
+" Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'wellle/targets.vim'
 " Plugin 'kien/rainbow_parentheses.vim'
@@ -159,6 +161,7 @@ inoremap <c-k> <esc>:m-2<cr>==gi
 vnoremap <c-j> :m'>+<cr>gv
 vnoremap <c-k> :m-2<cr>gv
 
+nnoremap Y y$   " similar behavior to C and D
 inoremap jk <Esc>l
 " nnoremap ; :
 nnoremap , :
@@ -174,9 +177,9 @@ endif
 
 "=======================[ surround ]============================================
 " lets you surround words with only 'sw)'
-nmap s ysi
-nmap S ysa
-nmap s$ ys$
+" nmap s ysi
+" nmap S ysa
+" nmap s$ ys$
 
 " auto close brackets, parentheses, etc.
 " inoremap { {}<Left>
