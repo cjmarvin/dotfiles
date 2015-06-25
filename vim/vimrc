@@ -1,22 +1,27 @@
+" ============================================================================
+" ========================== [ vim-plug ] ====================================
+" automatic installation
+" if empty(glob('~/.vim/autoload/plug.vim'))
+"   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"   autocmd VimEnter * PlugInstall
+" endif
 
-"==================[ Vundle ]============================
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tComment'
+call plug#begin()
+" Plug 'gmarik/Vundle.vim'
+Plug 'tComment'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 " Plugin 'Lokaltog/vim-easymotion'
-Plugin 'bling/vim-airline'
+Plug 'justinmk/vim-sneak'
+Plug 'bling/vim-airline'
 " Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-markdown'
+" Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
 " Plugin 'vim-scripts/CycleColor'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
 " Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'wellle/targets.vim'
 " Plugin 'kien/rainbow_parentheses.vim'
@@ -25,19 +30,12 @@ Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'chrisbra/vim-diff-enhanced'
 " Plugin 'vim-scripts/matrix.vim'
 " Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml'
 " Plugin 'chrisbra/csv.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-
-call vundle#end()
-filetype plugin indent on
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append'!' to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append '!' to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append '!' to auto
-"                     approve removal
-" =======================================================
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/vim-easy-align'
+call plug#end()
+" ============================================================================
 
 syntax enable       "Enable syntax processing
 set tabstop=4       "Number of visual spaces per <TAB>
@@ -61,7 +59,8 @@ set ttimeoutlen=100  "Typing timeout
 "set undofile       "Undo even after exiting and reopening vim
 " set re=1            " old regex (doesn't work before 7.4)
 
-filetype plugin on  "Load plugins
+filetype plugin on        "Load plugins
+filetype plugin indent on " Language dependent indenting, might need for Linux
 set wildmenu        "Visual autocomplete for command menu
 set wildmode=list:longest
 set showmatch       "Highlight matching [{( )}]
