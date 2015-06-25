@@ -243,3 +243,5 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 
+" === Makefile modelines are by default only read from top/bottom 5 lines
+autocmd FileType make set modelines=0
