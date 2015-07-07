@@ -1,0 +1,28 @@
+
+# online help
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/help
+
+# tab completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+autoload -U compinit promptinit
+compinit
+promptinit
+setopt completeinword
+
+prompt walters
+
+# case insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# kill all
+zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
+
+# colors for ls
+if [[ -x "`whence -p dircolors`" ]]; then
+  eval `dircolors`
+  alias ls='ls -F --color=auto'
+else
+  alias ls='ls -F'
+fi
+
