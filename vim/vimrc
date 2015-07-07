@@ -37,8 +37,16 @@ Plug 'stephpy/vim-yaml'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
 call plug#end()
-" ============================================================================
-
+" =============================================================================
+" -======================= [ neocomplete ]=====================================
+" set rtp+=~/.vim/neocomplete.vim
+" let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+" let g:neocomplete#enable_smart_case = 1
+" set completeopt-=preview
+" let g:neocomplete#enable_auto_select = 0
+" " inoremap <expr><C-g> neocomplete#undo_completion()
+" =============================================================================
 syntax enable       "Enable syntax processing
 set tabstop=4       "Number of visual spaces per <TAB>
 set softtabstop=4   "Number of spaces in tab when editing
@@ -244,6 +252,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
+" =====================[ EasyAlign ]=================
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " === Makefile modelines are by default only read from top/bottom 5 lines
 autocmd FileType make set modelines=0
