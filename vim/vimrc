@@ -65,6 +65,7 @@ set ruler
 set timeoutlen=1000
 set ttimeout
 set ttimeoutlen=100  "Typing timeout
+set matchtime=10
 " set hidden          "Open new buffer without saving current buffer
 "set undofile       "Undo even after exiting and reopening vim
 " set re=1            " old regex (doesn't work before 7.4)
