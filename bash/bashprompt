@@ -12,14 +12,19 @@ set_prompt () {
     Checkmark='\342\234\223'
     nfiles="\$(ls -1 | wc -l | sed 's: ::g') files"
     nsize="\$(ls -skh | head -n1 | sed 's/total //')b"
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWUPSTREAM="verbose"
+    GIT_PS1_SHOWCOLORHINTS=1
     if [[ $EUID == 0 ]]; then
         PS1="\n$Grey($Red\\h"
     else
-        PS1="\n$Grey($IGreen\\u$Grey@$Purple\\h"
+        PS1="\n$Grey($IGreen\\u"
     fi
-    PS1+="$Grey)"
     if [[ -n $SSH_CONNECTION ]]; then
-        PS1+=" ($Red ssh $Grey)"
+        PS1+="$Grey@$Purple\\h$Grey) ($Red ssh $Grey)"
+    else
+        PS1+="$Grey@$Purple\\h$Grey)"
     fi
     PS1+=" ($IGreen\j jobs$Grey) ($IGreen\@ \d$Grey)\n"
     PS1+="$Blue\\w$Grey$Red\$(__git_ps1)$Grey\n"
