@@ -1,4 +1,7 @@
-autoload -U compinit && compinit
+# insecure as root
+if [[ $(id -u) -ne 0 ]]; then
+    autoload -U compinit && compinit
+fi
 zmodload -i zsh/complist
 
 # tab completions
