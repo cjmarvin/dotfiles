@@ -1,6 +1,7 @@
 
 # dotpath=/Volumes/DataHD/astro_work/repos/dotfiles/zsh
-dotpath=$0:A:h
+dotpath=~/.zsh
+# dotpath=$0:A:h
 
 source $dotpath/checks.zsh
 source $dotpath/colors.zsh
