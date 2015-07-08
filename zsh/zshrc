@@ -11,4 +11,6 @@ source $dotpath/completion.zsh
 source $dotpath/aliases.zsh
 source $dotpath/functions.zsh
 source $dotpath/history.zsh
-source `brew --prefix`/etc/profile.d/z.sh
+if [[ $IS_MAC -eq 1 ]]; then
+    source `brew --prefix`/etc/profile.d/z.sh
+fi
