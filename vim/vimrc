@@ -36,6 +36,8 @@ Plug 'stephpy/vim-yaml'
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
+Plug 'ntpeters/vim-airline-colornum'
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 " =============================================================================
 " -======================= [ neocomplete ]=====================================
@@ -261,3 +263,4 @@ nmap ga <Plug>(EasyAlign)
 
 " === Makefile modelines are by default only read from top/bottom 5 lines
 autocmd FileType make set modelines=0
+
