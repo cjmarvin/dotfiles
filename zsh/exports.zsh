@@ -34,3 +34,11 @@ export EDITOR=/usr/bin/local/vim
 export VISUAL=/usr/bin/local/vim
 
 export ARCHFLAGS='-arch x86_64'
+
+# for TMUX
+if [[ $IS_LINUX -eq 1 ]]; then
+    ZSH=/usr/bin/zsh
+fi
+if [[ $IS_MAC -eq 1 ]]; then
+    ZSH=/usr/local/bin/zsh
+fi

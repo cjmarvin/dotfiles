@@ -1,14 +1,15 @@
 
-alias l="ls -al"
-alias ll="ls -alFGhkl"
-alias ls="ls -FGh"
+alias l="ls -al --color"
+alias ll="ls -alFGhkl --color"
+alias ls="ls -Fh --color"
 alias grep='grep --color=auto --exclude-dir=\.git'
+alias pygrep='grep --color=auto --include="*.py" --exclude-dir=\.git'
 
 alias 'dus=du -sckx * | sort -nr'
 alias targz="tar -zcvf"
 alias untargz="tar -zxvf"
 
-alias tmux='TERM=screen-256color-bce tmux'
+# alias tmux='TERM=screen-256color-bce tmux'
 
 alias acat='less ~dotpath/aliases.zsh'
 alias fcat='less ~dotpath/functions.zsh'
@@ -16,6 +17,8 @@ alias sz='source ~/.zshrc'
 
 # Remove all .git files from a folder
 alias resetgit='find . -type f | grep -i "\.git" | xargs rm'
+# fix EOL error in Git
+alias fixeol="find . -type f -exec sed -i 's/\x0d//g' {} \+"
 
 # This is GOLD for finding out what is taking so much space on your drives!
 alias diskspace="du -khs | sort -n -r | more"

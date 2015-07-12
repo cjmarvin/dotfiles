@@ -9,25 +9,23 @@
 [color]
 	ui = auto
 	# interactive = auto
-    [color "branch"]
+[color "branch"]
         current = yellow reverse
         local = yellow
         remote = green
-    [color "diff"]
+[color "diff"]
         meta = yellow bold
         frag = magenta bold
         old = red bold
         new = green bold
         whitespace = red reverse
-    [color "status"]
+[color "status"]
         added = yellow
         changed = green
         untracked = red
 [merge]
-	# tool = opendiff
 	tool = diff3
 [diff]
-	# tool = opendiff
 	tool = diff3
 [difftool]
 	prompt = false
@@ -65,7 +63,6 @@
 
     in = pull --dry-run
     r = !git ls-files -z --deleted | xargs -0 git rm
-
 
     # from http://haacked.com/archive/2014/07/28/github-flow-aliases/
     # rebase any local commits to be after pulled commits
