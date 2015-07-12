@@ -21,6 +21,10 @@ parse_git_branch() {
   (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
 }
 
+get_sha() {
+    git rev-parse --short HEAD 2>/dev/null
+    }
+
 # Show different symbols as appropriate for various Git repository states
 parse_git_state() {
   # Compose this value via multiple conditional appends.
