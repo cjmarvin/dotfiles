@@ -5,7 +5,12 @@ source $dotpath/checks.zsh
 source $dotpath/colors.zsh
 source $dotpath/setopt.zsh
 source $dotpath/exports.zsh
-source $dotpath/prompt.zsh
+
+# source $dotpath/prompt.zsh
+autoload -U promptinit && promptinit
+PURE_PROMPT_SYMBOL='%#'
+prompt pure
+
 source $dotpath/completion.zsh
 source $dotpath/aliases.zsh
 source $dotpath/functions.zsh
