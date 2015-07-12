@@ -1,7 +1,7 @@
 
-alias l="ls -al --color"
-alias ll="ls -alFGhkl --color"
-alias ls="ls -Fh --color"
+alias l="ls -al"
+alias ll="ls -alFGhkl"
+alias ls="ls -Fh"
 alias grep='grep --color=auto --exclude-dir=\.git'
 alias pygrep='grep --color=auto --include="*.py" --exclude-dir=\.git'
 
