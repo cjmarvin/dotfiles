@@ -1,7 +1,13 @@
 
-alias l="ls -al"
-alias ll="ls -alFGhkl"
-alias ls="ls -Fh"
+if [[ $IS_LINUX -eq 1 ]]; then
+    alias l="ls -al --color=auto"
+    alias ll="ls -aFGhkl --color=auto"
+    alias ls="ls -Fh --color=auto"
+elif [[ $IS_MAC -eq 1 ]]; then
+    alias l="ls -al"
+    alias ll="ls -aFGhkl"
+    alias ls="ls -Fh"
+fi
 alias grep='grep --color=auto --exclude-dir=\.git'
 alias pygrep='grep --color=auto --include="*.py" --exclude-dir=\.git'
 
@@ -34,6 +40,11 @@ alias flatten="find TargetDirectory/ -mindepth 2 -type f -exec mv -i '{}' Target
 
 # rmate
 alias sshrmate="ssh -R 52698:localhost:52698"
+
+if [[ $IS_MAC -eq 1 ]]; then
+    alias hide="defaults write com.apple.finder AppleShowAllFiles YES"
+    alias unhide="defaults write com.apple.finder AppleShowAllFiles NO"
+fi
 
 if [[ -f $dotpath/local.aliases.zsh ]]; then
     source $dotpath/local.aliases.zsh 
