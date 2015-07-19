@@ -38,8 +38,9 @@ Plug 'stephpy/vim-yaml'
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
-Plug 'ntpeters/vim-airline-colornum'
+" Plug 'ntpeters/vim-airline-colornum'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-scripts/vim-auto-save'
 call plug#end()
 " =============================================================================
 " -======================= [ neocomplete ]=====================================
@@ -118,7 +119,8 @@ nnoremap q <Nop>
 " vnoremap <Space> <PageDown>
 
 "====[ Show when lines extend past column 80 ]========================
-highlight ColorColumn ctermbg=magenta
+" highlight ColorColumn ctermbg=magenta
+highlight ColorColumn ctermbg=gray
 function! MarkMargin (on)
     if exists('b:MarkMargin')
         try
@@ -143,7 +145,15 @@ augroup END
 let mapleader =" "
 
 "Remove all trailing whitespace upon saving
-autocmd BufWritePre *py,*c :%s/\s\+$//e
+" autocmd BufWritePre *py,*c :%s/\s\+$//e
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfunc
+" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+autocmd FileWritePre * :call <SID>StripTrailingWhitespaces()
 
 "Unsets the last search pattern by hitting return
 nnoremap <CR> :noh<CR><CR>
