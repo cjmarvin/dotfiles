@@ -13,7 +13,7 @@ export PR_BOLD_RED PR_BOLD_GREEN PR_BOLD_YELLOW PR_BOLD_BLUE
 export PR_BOLD_WHITE PR_BOLD_BLACK
 
 # Clear LSCOLORS
-unset LSCOLORS
+# unset LSCOLORS
 
 # Main change, you can see directories on a dark background
 #expor tLSCOLORS=gxfxcxdxbxegedabagacad

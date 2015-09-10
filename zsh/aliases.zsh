@@ -1,8 +1,8 @@
 
 if [[ $IS_LINUX -eq 1 ]]; then
-    alias l="ls -al --color=auto"
-    alias ll="ls -aFGhkl --color=auto"
-    alias ls="ls -Fh --color=auto"
+    alias l="ls -al --color=always"
+    alias ll="ls -aFGhkl --color=always"
+    alias ls="ls -Fh --color=always"
 elif [[ $IS_MAC -eq 1 ]]; then
     alias l="ls -al"
     alias ll="ls -aFGhkl"
