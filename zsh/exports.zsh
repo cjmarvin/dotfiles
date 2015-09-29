@@ -21,7 +21,8 @@ path=($path)
 # misc
 # ----------------------------------------------------------------------------
 export LANG=en_US.UTF-8
-export TERM=xterm-256color
+export TERM=screen-256color
+# export TERM=xterm-256color
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
@@ -37,8 +38,8 @@ export ARCHFLAGS='-arch x86_64'
 
 # for TMUX
 if [[ $IS_LINUX -eq 1 ]]; then
-    ZSH=/usr/bin/zsh
+    export ZSH=/bin/zsh
 fi
 if [[ $IS_MAC -eq 1 ]]; then
-    ZSH=/usr/local/bin/zsh
+    export ZSH=/usr/local/bin/zsh
 fi
