@@ -42,6 +42,7 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'ntpeters/vim-airline-colornum'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-scripts/vim-auto-save'
+Plug 'christophermca/meta5'
 call plug#end()
 " =============================================================================
 " -======================= [ neocomplete ]=====================================
@@ -251,9 +252,11 @@ nnoremap \ :call FindConflict()<CR>
 nnoremap <leader>m :!make<cr>
 
 " molokai original color scheme
-colorscheme default
-let g:molokai_original = 1
-set background=dark
+" colorscheme default
+colorscheme meta5
+" let g:meta5_termcolors=256
+" let g:molokai_original = 1
+" set background=dark
 
 " =====================[ indent-guides ]=================
 let g:indent_guides_auto_colors = 0
