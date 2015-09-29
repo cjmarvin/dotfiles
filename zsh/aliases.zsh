@@ -42,8 +42,8 @@ alias flatten="find TargetDirectory/ -mindepth 2 -type f -exec mv -i '{}' Target
 alias sshrmate="ssh -R 52698:localhost:52698"
 
 if [[ $IS_MAC -eq 1 ]]; then
-    alias hide="defaults write com.apple.finder AppleShowAllFiles YES"
-    alias unhide="defaults write com.apple.finder AppleShowAllFiles NO"
+    alias hide="defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder"
+    alias unhide="defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder"
 fi
 
 if [[ -f $dotpath/local.aliases.zsh ]]; then

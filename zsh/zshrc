@@ -12,6 +12,8 @@ autoload -U promptinit && promptinit
 PURE_PROMPT_SYMBOL='%#'
 prompt pure
 
+bindkey '^R' history-incremental-search-backward
+
 source $dotpath/completion.zsh
 source $dotpath/aliases.zsh
 source $dotpath/functions.zsh

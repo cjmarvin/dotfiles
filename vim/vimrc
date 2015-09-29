@@ -39,9 +39,13 @@ Plug 'stephpy/vim-yaml'
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
-" Plug 'ntpeters/vim-airline-colornum'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'ntpeters/vim-airline-colornum'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'gosukiwi/vim-atom-dark'
 Plug 'vim-scripts/vim-auto-save'
+Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 " =============================================================================
 " -======================= [ neocomplete ]=====================================
@@ -277,3 +281,19 @@ nmap ga <Plug>(EasyAlign)
 " === Makefile modelines are by default only read from top/bottom 5 lines
 autocmd FileType make set modelines=0
 
+" ======================[ Rainbow Parentheses ]==================
+augroup rainbow_python
+    autocmd!
+    autocmd FileType python,tex,scheme RainbowParentheses
+augroup END
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" List of colors that you do not want. ANSI code or #RRGGBB
+let g:rainbow#blacklist = [233, 234]
+
+" ======================[ vim-sneak ]============================
+let g:sneak#s_next = 1
+
+" code folding
+set foldmethod=indent
+set foldlevel=99
