@@ -11,20 +11,24 @@ call plug#begin('~/.vim/plugged')
 " Plug 'gmarik/Vundle.vim'
 Plug 'tComment'
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.sh --clang-complete' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+" Plug 'scrooloose/syntastic'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 " Plugin 'Lokaltog/vim-easymotion'
 Plug 'justinmk/vim-sneak'
-Plug 'bling/vim-airline'
-" Plugin 'tpope/vim-fugitive'
+" Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rsi'
 " Plug 'tpope/vim-markdown'
 Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 " Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
 " Plugin 'vim-scripts/CycleColor'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-colorscheme-switcher'
 " Plugin 'xolox/vim-misc'
 " Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'terryma/vim-multiple-cursors'
@@ -38,12 +42,13 @@ Plug 'xolox/vim-colorscheme-switcher'
 Plug 'stephpy/vim-yaml'
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'ntpeters/vim-airline-colornum'
+" Plug 'ntpeters/vim-airline-colornum'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'gosukiwi/vim-atom-dark'
+Plug 'jonathanfilip/vim-lucius'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'christophermca/meta5'
 Plug 'dhruvasagar/vim-table-mode'
@@ -218,11 +223,11 @@ endif
 "
 "====================[Powerline ]==============================
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
 " let g:Powerline_symbols = 'compatible'
 " let g:Powerline_cache_enabled = 1
 " let g:airline_enable = 1
-let g:airline_powerline_fonts=1
+" let g:airline_powerline_fonts=1
 set encoding=utf-8
 set termencoding=utf-8
 " set term=xterm-256color
@@ -230,6 +235,68 @@ set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set rtp+=/Users/Library/Fonts
 set laststatus=2
+"====================[ lightline ]==============================
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'mode_map': { 'c': 'NORMAL' },
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+    \ },
+    \ 'component_function': {
+    \   'modified': 'LightLineModified',
+    \   'readonly': 'LightLineReadonly',
+    \   'fugitive': 'LightLineFugitive',
+    \   'filename': 'LightLineFilename',
+    \   'fileformat': 'LightLineFileformat',
+    \   'filetype': 'LightLineFiletype',
+    \   'fileencoding': 'LightLineFileencoding',
+    \   'mode': 'LightLineMode',
+    \ },
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
+
+function! LightLineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
+endfunction
+
+function! LightLineFilename()
+  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? ' '._ : ''
+  endif
+  return ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+"===================================================
 
 
 "=====================[ CtrlP ]=====================
@@ -300,3 +367,19 @@ let g:sneak#s_next = 1
 " code folding
 set foldmethod=indent
 set foldlevel=99
+
+" markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" git branch in statusline
+" set statusline+=%{fugitive#statusline()}
+
+" syntastic recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
