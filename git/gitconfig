@@ -42,6 +42,7 @@
 [alias]
     ci = commit
     co = checkout
+    pu = push -u origin
     st = status --column
     sts = status -s
 
