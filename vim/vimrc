@@ -25,6 +25,8 @@ Plug 'tpope/vim-rsi'
 " Plug 'tpope/vim-markdown'
 Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
 Plug 'LaTeX-Box-Team/LaTeX-Box'
+" Plug 'tmhedberg/SimpylFold'
+" Plug 'klen/python-mode'
 " Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
 " Plugin 'vim-scripts/CycleColor'
 " Plug 'xolox/vim-misc'
@@ -325,6 +327,7 @@ nnoremap <leader>m :!make<cr>
 " molokai original color scheme
 " colorscheme default
 colorscheme meta5
+" colorscheme seoul256
 " let g:meta5_termcolors=256
 " let g:molokai_original = 1
 " set background=dark
@@ -364,9 +367,6 @@ let g:rainbow#blacklist = [233, 234]
 " ======================[ vim-sneak ]============================
 let g:sneak#s_next = 1
 
-" code folding
-set foldmethod=indent
-set foldlevel=99
 
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -375,11 +375,24 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " set statusline+=%{fugitive#statusline()}
 
 " syntastic recommended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" code folding
+" set foldmethod=indent
+" set foldlevel=99
+" SimpylFold
+" let g:SimpylFold_docstring_preview = 1 " enable preview of docstrings
+" let g:SimpylFold_fold_docstring = 0 " disable docstrings
+" autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+" autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
