@@ -39,6 +39,7 @@ export ARCHFLAGS='-arch x86_64'
 # for TMUX
 if [[ $IS_LINUX -eq 1 ]]; then
     export ZSH=/bin/zsh
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/users/$USER/local/neovim/.deps/build/src/jemalloc/lib
 fi
 if [[ $IS_MAC -eq 1 ]]; then
     export ZSH=/usr/local/bin/zsh
