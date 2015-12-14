@@ -10,8 +10,14 @@ endif
 call plug#begin('~/.vim/plugged')
 " Plug 'gmarik/Vundle.vim'
 Plug 'tComment'
+" Plug 'ajh17/VimCompletesMe' " simple lightweight tab completion
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.sh --clang-complete' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+" Plug 'ervandew/supertab'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'sirver/ultisnips' 
+" Plug 'honza/vim-snippets'
+" Plug 'haya14busa/incsearch.vim'
 " Plug 'scrooloose/syntastic'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 " Plugin 'Lokaltog/vim-easymotion'
@@ -24,9 +30,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rsi'
 " Plug 'tpope/vim-markdown'
 Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
-Plug 'LaTeX-Box-Team/LaTeX-Box'
+" Plug 'LaTeX-Box-Team/LaTeX-Box' , { 'for' : 'tex' }
+" Plug 'lervag/vimtex'
 " Plug 'tmhedberg/SimpylFold'
-" Plug 'klen/python-mode'
+" Plug 'klen/python-mode' , { 'for' : 'python' }
 " Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
 " Plugin 'vim-scripts/CycleColor'
 " Plug 'xolox/vim-misc'
@@ -37,13 +44,13 @@ Plug 'LaTeX-Box-Team/LaTeX-Box'
 " Plugin 'wellle/targets.vim'
 " Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'davidhalter/jedi-vim'
-" Plugin 'klen/python-mode'
 " Plugin 'chrisbra/vim-diff-enhanced'
 " Plugin 'vim-scripts/matrix.vim'
 " Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plug 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'Yggdroot/indentLine' " Buggy with LaTeX, slow with all
 " Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/seoul256.vim'
@@ -53,7 +60,10 @@ Plug 'gosukiwi/vim-atom-dark'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'christophermca/meta5'
+Plug 'joshdick/onedark.vim'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'chriskempson/tomorrow-theme'
+" Plug 'natw/keyboard_cat.vim' " fun!
 call plug#end()
 " =============================================================================
 " -======================= [ neocomplete ]=====================================
@@ -169,7 +179,7 @@ endfunc
 autocmd FileWritePre * :call <SID>StripTrailingWhitespaces()
 
 "Unsets the last search pattern by hitting return
-nnoremap <CR> :noh<CR><CR>
+" nnoremap <CR> :noh<CR><CR>
 
 "====================================[ relative numbers ]=======================
 " toggle between relative line numbers
@@ -181,6 +191,7 @@ function! NumberToggle()
     endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
+autocmd VimEnter * :call NumberToggle()
 
 " relative in normal mode; absolute in insert mode
 " autocmd InsertEnter * :set number
@@ -326,8 +337,9 @@ nnoremap <leader>m :!make<cr>
 
 " molokai original color scheme
 " colorscheme default
-colorscheme meta5
-" colorscheme seoul256
+" colorscheme meta5
+" colorscheme onedark
+colorscheme seoul256
 " let g:meta5_termcolors=256
 " let g:molokai_original = 1
 " set background=dark
@@ -347,9 +359,10 @@ let g:indent_guides_guide_size = 1
 
 " =====================[ EasyAlign ]=================
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
+" vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
+
 
 " === Makefile modelines are by default only read from top/bottom 5 lines
 autocmd FileType make set modelines=0
@@ -367,7 +380,6 @@ let g:rainbow#blacklist = [233, 234]
 " ======================[ vim-sneak ]============================
 let g:sneak#s_next = 1
 
-
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
@@ -384,10 +396,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 " code folding
 " set foldmethod=indent
 " set foldlevel=99
@@ -396,3 +404,42 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " let g:SimpylFold_fold_docstring = 0 " disable docstrings
 " autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 " autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+
+" disable mouse except for help
+set mouse=h
+
+
+" this is still up in the air
+"
+" " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+" let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+"
+" " Plugin 'ervandew/supertab'
+" let g:SuperTabDefaultCompletionType    = '<C-n>'
+" let g:SuperTabDefaultCompletionType    = '<C-tab>'
+" let g:SuperTabCrMapping                = 0
+"
+" " Plugin 'SirVer/ultisnips'
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+"
+" " snippets
+" let g:tex_flavor='latex'
+"
+" " incsearch
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
+" set hlsearch
+" let g:incsearch#auto_nohlsearch = 1
+" map n  <Plug>(incsearch-nohl-n)
+" map N  <Plug>(incsearch-nohl-N)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
