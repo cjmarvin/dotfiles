@@ -12,12 +12,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'tComment'
 " Plug 'ajh17/VimCompletesMe' " simple lightweight tab completion
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.sh --clang-complete' }
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+" Plug 'Shougo/deoplete.nvim' " use only when completely switched to python3
 " Plug 'ervandew/supertab'
 " Plug 'jiangmiao/auto-pairs'
-" Plug 'sirver/ultisnips' 
-" Plug 'honza/vim-snippets'
-" Plug 'haya14busa/incsearch.vim'
+" Plug 'rstacruz/vim-closer'
+Plug 'cohama/lexima.vim'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'haya14busa/incsearch.vim'
+Plug 'tweekmonster/braceless.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'airblade/vim-gitgutter'
 " Plug 'scrooloose/syntastic'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 " Plugin 'Lokaltog/vim-easymotion'
@@ -28,6 +34,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rsi'
+" Plug 'roman/golden-ratio'
 " Plug 'tpope/vim-markdown'
 Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
 " Plug 'LaTeX-Box-Team/LaTeX-Box' , { 'for' : 'tex' }
@@ -41,18 +48,20 @@ Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
 " Plugin 'xolox/vim-misc'
 " Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 " Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'chrisbra/vim-diff-enhanced'
 " Plugin 'vim-scripts/matrix.vim'
 " Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
+Plug 'elzr/vim-json', { 'for': 'yaml' }
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'Yggdroot/indentLine' " Buggy with LaTeX, slow with all
-" Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'unblevable/quick-scope'
 Plug 'junegunn/seoul256.vim'
 " Plug 'ntpeters/vim-airline-colornum'
 Plug 'NLKNguyen/papercolor-theme'
@@ -63,7 +72,10 @@ Plug 'christophermca/meta5'
 Plug 'joshdick/onedark.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'chriskempson/tomorrow-theme'
-" Plug 'natw/keyboard_cat.vim' " fun!
+Plug 'ewilazarus/preto'
+Plug 'romainl/Apprentice'
+Plug 'natw/keyboard_cat.vim' " fun!
+Plug 'onur/vim-motivate'
 call plug#end()
 " =============================================================================
 " -======================= [ neocomplete ]=====================================
@@ -410,8 +422,8 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 set mouse=h
 
 
-" this is still up in the air
-"
+" " this is still up in the air
+" "
 " " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 " let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
@@ -427,19 +439,40 @@ set mouse=h
 " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
-"
-" " snippets
-" let g:tex_flavor='latex'
-"
+
+" snippets
+let g:tex_flavor='latex'
+
+" Use deoplete.
+" let g:deoplete#enable_at_startup = 1
+
 " " incsearch
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-" set hlsearch
-" let g:incsearch#auto_nohlsearch = 1
-" map n  <Plug>(incsearch-nohl-n)
-" map N  <Plug>(incsearch-nohl-N)
-" map *  <Plug>(incsearch-nohl-*)
-" map #  <Plug>(incsearch-nohl-#)
-" map g* <Plug>(incsearch-nohl-g*)
-" map g# <Plug>(incsearch-nohl-g#)
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+" recenter upon new search
+" nnoremap n nzz
+
+" lexima auto close
+call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
+call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
+call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
+
+set list
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
