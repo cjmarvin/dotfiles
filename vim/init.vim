@@ -1,1 +1,1 @@
-/users/cmarvin/projects/dotfiles/vim/vimrc
+/Users/starvinmartian/.vimrc

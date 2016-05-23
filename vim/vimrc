@@ -9,34 +9,47 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " Plug 'gmarik/Vundle.vim'
-Plug 'tComment'
+Plug 'tomtom/tcomment_vim'
 " Plug 'ajh17/VimCompletesMe' " simple lightweight tab completion
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.sh --clang-complete' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
-" Plug 'Shougo/deoplete.nvim' " use only when completely switched to python3
-" Plug 'ervandew/supertab'
-" Plug 'jiangmiao/auto-pairs'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+let g:python_host_prog = '~/anaconda/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+Plug 'ervandew/supertab'
+" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plug 'rstacruz/vim-closer'
-Plug 'cohama/lexima.vim'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'sirver/ultisnips'
+" Plug 'cohama/lexima.vim'
+" Plug 'honza/vim-snippets'
 Plug 'haya14busa/incsearch.vim'
-Plug 'tweekmonster/braceless.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'airblade/vim-gitgutter'
+" Plug 'tweekmonster/braceless.vim' " great for python
+" autocmd FileType python BracelessEnable +indent +fold +highlight-cc2
+" Plug 'kshenoy/vim-signature'
+" Plug 'airblade/vim-gitgutter'
 " Plug 'scrooloose/syntastic'
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 " Plugin 'Lokaltog/vim-easymotion'
 Plug 'justinmk/vim-sneak'
 " Plug 'bling/vim-airline'
 Plug 'itchyny/lightline.vim'
+Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rsi'
-" Plug 'roman/golden-ratio'
+Plug 'sheerun/vim-polyglot'
+" Plug 'tpope/vim-unimpaired'
 " Plug 'tpope/vim-markdown'
-Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
+" Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' } " launches browser
+" with CTRL-_ for some reason
 " Plug 'LaTeX-Box-Team/LaTeX-Box' , { 'for' : 'tex' }
 " Plug 'lervag/vimtex'
 " Plug 'tmhedberg/SimpylFold'
@@ -48,7 +61,7 @@ Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' }
 " Plugin 'xolox/vim-misc'
 " Plugin 'xolox/vim-colorscheme-switcher'
 " Plugin 'terryma/vim-multiple-cursors'
-Plug 'wellle/targets.vim'
+" Plug 'wellle/targets.vim'
 " Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'chrisbra/vim-diff-enhanced'
@@ -58,6 +71,7 @@ Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 Plug 'elzr/vim-json', { 'for': 'yaml' }
 " Plugin 'chrisbra/csv.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'triglav/vim-visual-increment'
 " Plug 'Yggdroot/indentLine' " Buggy with LaTeX, slow with all
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -74,7 +88,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'chriskempson/tomorrow-theme'
 Plug 'ewilazarus/preto'
 Plug 'romainl/Apprentice'
-Plug 'natw/keyboard_cat.vim' " fun!
+" Plug 'natw/keyboard_cat.vim' " fun!
 Plug 'onur/vim-motivate'
 call plug#end()
 " =============================================================================
@@ -221,9 +235,10 @@ vnoremap <c-j> :m'>+<cr>gv
 vnoremap <c-k> :m-2<cr>gv
 
 nnoremap Y y$   " similar behavior to C and D
+nnoremap K f<space>r<CR>   " NOTE this removes behavior of K for documentation
 inoremap jk <Esc>l
 " nnoremap ; :
-nnoremap , :
+" nnoremap , :
 
 " insert new line - THIS MAKES o and O slow!
 " nmap oo o<esc>k
@@ -253,6 +268,7 @@ set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
 " let g:Powerline_cache_enabled = 1
 " let g:airline_enable = 1
 " let g:airline_powerline_fonts=1
+scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
 " set term=xterm-256color
@@ -345,14 +361,14 @@ endfunction
 nnoremap \ :call FindConflict()<CR>
 
 " for projects
-nnoremap <leader>m :!make<cr>
+" nnoremap <leader>m :!make<cr>
 
 " molokai original color scheme
 " colorscheme default
-" colorscheme meta5
+colorscheme meta5
 " colorscheme onedark
-colorscheme seoul256
 " let g:meta5_termcolors=256
+" colorscheme seoul256
 " let g:molokai_original = 1
 " set background=dark
 
@@ -425,13 +441,14 @@ set mouse=h
 " " this is still up in the air
 " "
 " " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
-" let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+" let g:ycm_path_to_python_interpreter = '~/anaconda/bin/python'
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 "
 " " Plugin 'ervandew/supertab'
-" let g:SuperTabDefaultCompletionType    = '<C-n>'
-" let g:SuperTabDefaultCompletionType    = '<C-tab>'
-" let g:SuperTabCrMapping                = 0
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabDefaultCompletionType    = '<C-tab>'
+let g:SuperTabCrMapping                = 0
 "
 " " Plugin 'SirVer/ultisnips'
 " let g:UltiSnipsExpandTrigger="<tab>"
@@ -439,20 +456,17 @@ set mouse=h
 " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
-
-" snippets
-let g:tex_flavor='latex'
-
-" Use deoplete.
-" let g:deoplete#enable_at_startup = 1
-
+"
+" " snippets
+" let g:tex_flavor='latex'
+"
 " " incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 set hlsearch
-let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
+let g:incsearch#auto_nohlsearch = 1
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
@@ -463,12 +477,12 @@ map g# <Plug>(incsearch-nohl-g#)
 " nnoremap n nzz
 
 " lexima auto close
-call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
-call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
-call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
+" call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
+" call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
+" call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
 
-set list
 
+" set list
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
@@ -476,3 +490,51 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+
+" function inside lightline
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'filename', ], [ 'tagbar' ] ]
+      \ },
+      \ 'component': {
+      \         'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
+      \ },
+      \ 'component_function': {
+      \   'modified': 'LightLineModified',
+      \   'readonly': 'LightLineReadonly',
+      \   'filename': 'LightLineFilename',
+      \   'fileformat': 'LightLineFileformat',
+      \   'filetype': 'LightLineFiletype',
+      \   'fileencoding': 'LightLineFileencoding',
+      \   'mode': 'LightLineMode'}
+      \ }
+function! LightLineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+function! LightLineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+function! LightLineFilename()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? g:lightline.fname :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+" autoexpansion
+inoremap (<CR> (<CR>)<Esc>O
+inoremap (:<CR> (<CR>):<Esc>O
+inoremap (:<Space> ():h
+inoremap {<CR> {<CR>}<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
