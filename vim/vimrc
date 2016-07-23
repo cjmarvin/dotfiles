@@ -1,6 +1,6 @@
 " ============================================================================
 " ========================== [ vim-plug ] ====================================
-" automatic installation
+" automatic installation of vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -kfLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -8,294 +8,130 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Plug 'gmarik/Vundle.vim'
-Plug 'tomtom/tcomment_vim'
-" Plug 'ajh17/VimCompletesMe' " simple lightweight tab completion
-" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.sh --clang-complete' }
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+" ============================================================================
+" ============================================================================
+" ========================== [ autocompletion ] ==============================
+" deoplete async completion
 let g:python_host_prog = '~/anaconda/bin/python'
+" let g:python3_host_prog = '~/anaconda3/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-Plug 'ervandew/supertab'
-" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py' }
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-" Plug 'rstacruz/vim-closer'
-Plug 'jiangmiao/auto-pairs'
-" Plug 'sirver/ultisnips'
-" Plug 'cohama/lexima.vim'
-" Plug 'honza/vim-snippets'
-Plug 'haya14busa/incsearch.vim'
-" Plug 'tweekmonster/braceless.vim' " great for python
-" autocmd FileType python BracelessEnable +indent +fold +highlight-cc2
-" Plug 'kshenoy/vim-signature'
-" Plug 'airblade/vim-gitgutter'
-" Plug 'scrooloose/syntastic'
-" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-" Plugin 'Lokaltog/vim-easymotion'
-Plug 'justinmk/vim-sneak'
-" Plug 'bling/vim-airline'
-Plug 'itchyny/lightline.vim'
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rsi'
-Plug 'sheerun/vim-polyglot'
-" Plug 'tpope/vim-unimpaired'
-" Plug 'tpope/vim-markdown'
-" Plug 'suan/vim-instant-markdown' , { 'for': 'markdown' } " launches browser
-" with CTRL-_ for some reason
-" Plug 'LaTeX-Box-Team/LaTeX-Box' , { 'for' : 'tex' }
-" Plug 'lervag/vimtex'
-" Plug 'tmhedberg/SimpylFold'
-" Plug 'klen/python-mode' , { 'for' : 'python' }
-" Plugin 'tpope/vim-abolish' " gives coercion feature to change from CamelCase to under_score and vice versa
-" Plugin 'vim-scripts/CycleColor'
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-colorscheme-switcher'
-" Plugin 'xolox/vim-misc'
-" Plugin 'xolox/vim-colorscheme-switcher'
-" Plugin 'terryma/vim-multiple-cursors'
-" Plug 'wellle/targets.vim'
-" Plugin 'kien/rainbow_parentheses.vim'
-" Plugin 'davidhalter/jedi-vim'
-" Plugin 'chrisbra/vim-diff-enhanced'
-" Plugin 'vim-scripts/matrix.vim'
-" Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
-Plug 'elzr/vim-json', { 'for': 'yaml' }
-" Plugin 'chrisbra/csv.vim'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'triglav/vim-visual-increment'
-" Plug 'Yggdroot/indentLine' " Buggy with LaTeX, slow with all
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'unblevable/quick-scope'
-Plug 'junegunn/seoul256.vim'
-" Plug 'ntpeters/vim-airline-colornum'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'vim-scripts/vim-auto-save'
-Plug 'christophermca/meta5'
-Plug 'joshdick/onedark.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'chriskempson/tomorrow-theme'
-Plug 'ewilazarus/preto'
-Plug 'romainl/Apprentice'
-" Plug 'natw/keyboard_cat.vim' " fun!
-Plug 'onur/vim-motivate'
-call plug#end()
-" =============================================================================
-" -======================= [ neocomplete ]=====================================
-" set rtp+=~/.vim/neocomplete.vim
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" set completeopt-=preview
-" let g:neocomplete#enable_auto_select = 0
-" " inoremap <expr><C-g> neocomplete#undo_completion()
-" =============================================================================
-syntax enable       "Enable syntax processing
-set tabstop=4       "Number of visual spaces per <TAB>
-set softtabstop=4   "Number of spaces in tab when editing
-set shiftwidth=4
-set shiftround      "Always indent/outdent to nearest tabstop
-set smarttab        "Use shiftwidths at left margin, tabstops everywhere else
-set expandtab       "Tabs are spaces
-set autoindent
-set scrolloff=10     " always show n lines above or below cursor
-set number          "Show line numbers
-set showcmd         "Show command in bottom bar
-" set cursorline      "Hightlight current line
-set ttyfast         "Faster scrolling
-set lazyredraw
-set ruler
-set timeoutlen=1000
-set ttimeout
-set ttimeoutlen=100  "Typing timeout
-set matchtime=10
-" set hidden          "Open new buffer without saving current buffer
-"set undofile       "Undo even after exiting and reopening vim
-" set re=1            " old regex (doesn't work before 7.4)
-
-filetype plugin on        "Load plugins
-filetype plugin indent on " Language dependent indenting, might need for Linux
-set wildmenu        "Visual autocomplete for command menu
-set wildmode=list:longest
-set showmatch       "Highlight matching [{( )}]
-set incsearch       "Lookahead search as characters are entered
-set hlsearch        "Highlight all matches
-set ignorecase      "Ignore case in all searches
-set smartcase       "   unless uppercase letters used
-set backspace=indent,eol,start  " Fix delete not working in insert mode
-set pastetoggle=<F2>
-
-" autocmd BufEnter *.c set sw=2 ts=2 sts=2
-autocmd FileType make set noexpandtab ts=8 sw=8 sts=8
-" autocmd BufNewFile,BufRead *.tex set sw=2 ts=2 sts=2 inoremap { {}<left> "spell
-" autocmd BufNewFile,BufRead *.tex set filetype=tex
-autocmd FileType *.c set sw=2 ts=2 sts=2
-" autocmd FileType *.tex set spell sw=2 ts=2 sts=2
-
-"Split windows to the right and to the bottom
-set splitright
-set splitbelow
-
-" remap accidental macro mapping when trying to quit
-nnoremap Q q
-nnoremap q <Nop>
-
-"====[ Make arrow keys move visual blocks around ]=====================
-" runtime plugin/dragvisuals.vim
-" vmap <expr> <LEFT>  DVB_Drag('left')
-" vmap <expr> <RIGHT> DVB_Drag('right')
-" vmap <expr> <DOWN>  DVB_Drag('down')
-" vmap <expr> <UP>    DVB_Drag('up')
-" vmap <expr> D       DVB_Duplicate()
-" vmap <expr> <C-D>   DVB_Duplicate()
-" " Remove any introduced trailing whitespace after moving...
-" let g:DVB_TrimWS = 1
-
-
-" Use space to jump down a page (like browsers do)...
-" nnoremap <Space> <PageDown>
-" vnoremap <Space> <PageDown>
-
-"====[ Show when lines extend past column 80 ]========================
-" highlight ColorColumn ctermbg=magenta
-highlight ColorColumn ctermbg=gray
-function! MarkMargin (on)
-    if exists('b:MarkMargin')
-        try
-            call matchdelete(b:MarkMargin)
-        catch /./
-        endtry
-        unlet b:MarkMargin
-    endif
-    if a:on
-        let b:MarkMargin = matchadd('ColorColumn', '\%80v', 100)
-    endif
-endfunction
-
-augroup MarkMargin
-    autocmd!
-    autocmd  BufEnter *     :call MarkMargin(1)
-    autocmd  BufEnter *.vp* :call MarkMargin(0)
-augroup END
-"===============================================================================
-
-" let mapleader = "\<Space>"
-let mapleader =" "
-
-"Remove all trailing whitespace upon saving
-" autocmd BufWritePre *py,*c :%s/\s\+$//e
-function! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfunc
-" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-autocmd FileWritePre * :call <SID>StripTrailingWhitespaces()
-
-"Unsets the last search pattern by hitting return
-" nnoremap <CR> :noh<CR><CR>
-
-"====================================[ relative numbers ]=======================
-" toggle between relative line numbers
-function! NumberToggle()
-    if(&relativenumber == 0)
-        set relativenumber
-    else
-        set norelativenumber
-    endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
-autocmd VimEnter * :call NumberToggle()
-
-" relative in normal mode; absolute in insert mode
-" autocmd InsertEnter * :set number
-" autocmd InsertLeave * :set relativenumber
-"===============================================================================
-
-"======================[ moving lines and selections ]==========================
-nnoremap <c-k> :m-2<cr>==
-nnoremap <c-j> :m+<cr>==
-inoremap <c-j> <esc>:m+<cr>==gi
-inoremap <c-k> <esc>:m-2<cr>==gi
-" vnoremap <c-j> :m'>+<cr>gv=gv
-" vnoremap <c-k> :m-2<cr>gv=gv
-vnoremap <c-j> :m'>+<cr>gv
-vnoremap <c-k> :m-2<cr>gv
-
-nnoremap Y y$   " similar behavior to C and D
-nnoremap K f<space>r<CR>   " NOTE this removes behavior of K for documentation
-inoremap jk <Esc>l
-" nnoremap ; :
-" nnoremap , :
-
-" insert new line - THIS MAKES o and O slow!
-" nmap oo o<esc>k
-" nmap OO O<esc>j
-"
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
+if has('nvim')
+    function! DoRemote(arg)
+    UpdateRemotePlugins
+    endfunction
+    Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+    let g:deoplete#enable_at_startup = 1
 endif
 
-"=======================[ surround ]============================================
-" lets you surround words with only 'sw)'
-" nmap s ysi
-" nmap S ysa
-" nmap s$ ys$
+" use tab for autocompletion
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabDefaultCompletionType    = '<C-tab>'
+let g:SuperTabCrMapping                = 0
 
-" auto close brackets, parentheses, etc.
-" inoremap { {}<Left>
-" inoremap ' ''<Left>
-" inoremap " ""<Left>
-" inoremap ( ()<Left>
+" snippets
+" Plug 'sirver/ultisnips'
+" Plug 'honza/vim-snippets'
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 "
-"====================[Powerline ]==============================
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
-" let g:Powerline_symbols = 'fancy'
-" let g:Powerline_symbols = 'compatible'
-" let g:Powerline_cache_enabled = 1
-" let g:airline_enable = 1
-" let g:airline_powerline_fonts=1
-scriptencoding utf-8
-set encoding=utf-8
-set termencoding=utf-8
-" set term=xterm-256color
-set t_Co=256
-set fillchars+=stl:\ ,stlnc:\
-set rtp+=/Users/Library/Fonts
-set laststatus=2
-"====================[ lightline ]==============================
-let g:lightline = {
-    \ 'colorscheme': 'wombat',
-    \ 'mode_map': { 'c': 'NORMAL' },
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-    \ },
-    \ 'component_function': {
-    \   'modified': 'LightLineModified',
-    \   'readonly': 'LightLineReadonly',
-    \   'fugitive': 'LightLineFugitive',
-    \   'filename': 'LightLineFilename',
-    \   'fileformat': 'LightLineFileformat',
-    \   'filetype': 'LightLineFiletype',
-    \   'fileencoding': 'LightLineFileencoding',
-    \   'mode': 'LightLineMode',
-    \ },
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' }
-    \ }
+" " snippets
+" let g:tex_flavor='latex'
+
+" syntax highlighter
+" Plug 'scrooloose/syntastic'
+" " syntastic recommended settings
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" comments
+Plug 'tomtom/tcomment_vim'
+" Plug 'tpope/vim-commentary'
+
+" autoclose pairs
+" lexima auto close
+Plug 'cohama/lexima.vim'
+" call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
+" call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
+" call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'rstacruz/vim-closer'
+
+" " autoexpansion - seems buggy with auto pairs
+" inoremap (<CR> (<CR>)<Esc>O
+" inoremap (:<CR> (<CR>):<Esc>O
+" inoremap (:<Space> ():h
+" inoremap {<CR> {<CR>}<Esc>O
+" inoremap [<CR> [<CR>]<Esc>O
+" ============================================================================
+" ============================================================================
+" ========================== [ moving around ] ===============================
+" move around with s<letter><letter>
+Plug 'justinmk/vim-sneak'
+let g:sneak#s_next = 1
+
+" highlight character motions
+Plug 'unblevable/quick-scope'
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" highlight all incsearch matches
+Plug 'haya14busa/incsearch.vim'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+set hlsearch
+map n  <Plug>(incsearch-nohl-n)
+let g:incsearch#auto_nohlsearch = 1
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+" highlight fuzzy search but still experimental
+Plug 'haya14busa/incsearch-fuzzy.vim'
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
+
+" improved search highlighting
+" Plug 'timakro/vim-searchant'
+
+" ============================================================================
+" ============================================================================
+" ========================== [ statusline ] ==================================
+" very light statusline
+Plug 'itchyny/lightline.vim'
+" show functions inside lightline
+" let g:lightline = {
+"     \ 'colorscheme': 'wombat',
+"     \ 'mode_map': { 'c': 'NORMAL' },
+"     \ 'active': {
+"     \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+"     \ },
+"     \ 'component_function': {
+"     \   'modified': 'LightLineModified',
+"     \   'readonly': 'LightLineReadonly',
+"     \   'fugitive': 'LightLineFugitive',
+"     \   'filename': 'LightLineFilename',
+"     \   'fileformat': 'LightLineFileformat',
+"     \   'filetype': 'LightLineFiletype',
+"     \   'fileencoding': 'LightLineFileencoding',
+"     \   'mode': 'LightLineMode',
+"     \ },
+"     \ 'separator': { 'left': '', 'right': '' },
+"     \ 'subseparator': { 'left': '', 'right': '' }
+"     \ }
 
 function! LightLineModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -305,14 +141,14 @@ function! LightLineReadonly()
   return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
 endfunction
 
-function! LightLineFilename()
-  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
+" function! LightLineFilename()
+"   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+"         \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+"         \  &ft == 'unite' ? unite#get_status_string() :
+"         \  &ft == 'vimshell' ? vimshell#get_status_string() :
+"         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+"         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+" endfunction
 
 function! LightLineFugitive()
   if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
@@ -337,42 +173,66 @@ endfunction
 function! LightLineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-"===================================================
-
-
-"=====================[ CtrlP ]=====================
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-
-" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-" let g:ctrlp_custom_ignore = {
-    " \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    " \ 'file': '\v\.(exe|so|dll)$',
-    " \ }
-
-" Use \ to search for conflicts in files
-function! FindConflict()
-    try
-        /<<<<<<<
-    catch
-    endtry
+" show functions inside lightline
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'mode_map': { 'c': 'NORMAL' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename', ], [ 'tagbar' ] ]
+      \ },
+      \ 'component': {
+      \         'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
+      \ },
+      \ 'component_function': {
+      \   'modified': 'LightLineModified',
+      \   'readonly': 'LightLineReadonly',
+    \   'fugitive': 'LightLineFugitive',
+      \   'filename': 'LightLineFilename',
+      \   'fileformat': 'LightLineFileformat',
+      \   'filetype': 'LightLineFiletype',
+      \   'fileencoding': 'LightLineFileencoding',
+      \   'mode': 'LightLineMode',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+" function! LightLineModified()
+"   return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+" endfunction
+" function! LightLineReadonly()
+"   return &ft !~? 'help' && &readonly ? 'RO' : ''
+" endfunction
+function! LightLineFilename()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? g:lightline.fname :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
-nnoremap \ :call FindConflict()<CR>
+" function! LightLineFileformat()
+"   return winwidth(0) > 70 ? &fileformat : ''
+" endfunction
+" function! LightLineFiletype()
+"   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+" endfunction
+" function! LightLineFileencoding()
+"   return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+" endfunction
 
-" for projects
-" nnoremap <leader>m :!make<cr>
+" show function or class inside of in statusline
+" really only configured for python
+Plug 'majutsushi/tagbar'
 
-" molokai original color scheme
-" colorscheme default
-colorscheme meta5
-" colorscheme onedark
-" let g:meta5_termcolors=256
-" colorscheme seoul256
-" let g:molokai_original = 1
-" set background=dark
+" git functionality, also needed for statusline
+Plug 'tpope/vim-fugitive'
+" ============================================================================
+" ============================================================================
+" ========================== [ aesthetics ] ==================================
+" colorize column numbers
+" Plug 'ntpeters/vim-airline-colornum'
 
-" =====================[ indent-guides ]=================
+" indentation guides
+Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_auto_colors = 0
 " let g:indent_guides_auto_colors = 1
 " hi IndentGuidesOdd  ctermbg=black           " dark background
@@ -385,156 +245,339 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-" =====================[ EasyAlign ]=================
+" colorize braces
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
+" Plug 'junegunn/rainbow_parentheses.vim'
+" augroup rainbow_python
+"     autocmd!
+"     autocmd FileType python,tex,scheme RainbowParentheses
+" augroup END
+" let g:rainbow#max_level = 16
+" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" " List of colors that you do not want. ANSI code or #RRGGBB
+" let g:rainbow#blacklist = [233, 234]
+
+" show marks
+" Plug 'kshenoy/vim-signature'
+
+" show commit diffs
+" Plug 'airblade/vim-gitgutter'
+" ============================================================================
+" ============================================================================
+" ========================== [ mappings ] ===========================
+" necessary '.'
+Plug 'tpope/vim-repeat'
+
+" necessary to complete pairs
+" Plug 'tpope/vim-surround'
+" " lets you surround words with only 'sw)'
+" nmap s ysi
+" nmap S ysa
+" nmap s$ ys$
+" " auto close brackets, parentheses, etc.
+" inoremap { {}<Left>
+" inoremap ' ''<Left>
+" inoremap " ""<Left>
+" inoremap ( ()<Left>
+Plug 'machakann/vim-sandwich'
+
+" readline mappings for insert mode
+Plug 'tpope/vim-rsi'
+
+Plug 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 " vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 " nmap ga <Plug>(EasyAlign)
-
-
-" === Makefile modelines are by default only read from top/bottom 5 lines
-autocmd FileType make set modelines=0
-
-" ======================[ Rainbow Parentheses ]==================
-augroup rainbow_python
-    autocmd!
-    autocmd FileType python,tex,scheme RainbowParentheses
-augroup END
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-" List of colors that you do not want. ANSI code or #RRGGBB
-let g:rainbow#blacklist = [233, 234]
-
-" ======================[ vim-sneak ]============================
-let g:sneak#s_next = 1
-
-" markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-" git branch in statusline
-" set statusline+=%{fugitive#statusline()}
-
-" syntastic recommended settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-" code folding
-" set foldmethod=indent
-" set foldlevel=99
-" SimpylFold
-" let g:SimpylFold_docstring_preview = 1 " enable preview of docstrings
-" let g:SimpylFold_fold_docstring = 0 " disable docstrings
-" autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-" autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-
-
-" disable mouse except for help
-set mouse=h
-
-
-" " this is still up in the air
-" "
-" " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
-" let g:ycm_path_to_python_interpreter = '~/anaconda/bin/python'
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-"
-" " Plugin 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabDefaultCompletionType    = '<C-tab>'
-let g:SuperTabCrMapping                = 0
-"
-" " Plugin 'SirVer/ultisnips'
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-"
-" " snippets
-" let g:tex_flavor='latex'
-"
-" " incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-set hlsearch
-map n  <Plug>(incsearch-nohl-n)
-let g:incsearch#auto_nohlsearch = 1
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-
-" recenter upon new search
-" nnoremap n nzz
-
-" lexima auto close
-" call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
-" call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
-" call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
-
-
-" set list
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" makes numerical increments easier, leaves first match untouched
+Plug 'triglav/vim-visual-increment'
 
-" function inside lightline
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'filename', ], [ 'tagbar' ] ]
-      \ },
-      \ 'component': {
-      \         'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
-      \ },
-      \ 'component_function': {
-      \   'modified': 'LightLineModified',
-      \   'readonly': 'LightLineReadonly',
-      \   'filename': 'LightLineFilename',
-      \   'fileformat': 'LightLineFileformat',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode': 'LightLineMode'}
-      \ }
-function! LightLineModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+" more text objects
+Plug 'wellle/targets.vim'
+
+" additional key mappings
+Plug 'tpope/vim-unimpaired'
+
+" tmux integration
+Plug 'christoomey/vim-tmux-navigator'
+" let g:tmux_navigator_save_on_switch = 1
+" let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+" nnoremap <silent> ˙ :TmuxNavigateLeft<cr>
+" nnoremap <silent> ∆ :TmuxNavigateDown<cr>
+" nnoremap <silent> ˚ :TmuxNavigateUp<cr>
+" nnoremap <silent> ¬ :TmuxNavigateRight<cr>
+" nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previ/-Mapping} :TmuxNavigatePrevious<cr>
+
+" ============================================================================
+" ============================================================================
+" ========================== [ filetype settings ] ===========================
+" best collection of filetype settings
+Plug 'sheerun/vim-polyglot'
+
+" Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
+
+" Plug 'elzr/vim-json', { 'for': 'yaml' }
+
+" Plug 'tpope/vim-markdown'
+
+" python motions and settings
+" Plug 'tweekmonster/braceless.vim'
+" autocmd FileType python BracelessEnable +indent +fold +highlight-cc2
+
+" language writing usage problems
+" Plug 'reedes/vim-wordy', { 'for': 'tex' }
+
+" simple checklists
+Plug 'evansalter/vim-checklist'
+nnoremap <leader>ct :ChecklistToggleCheckbox<cr>
+nnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+nnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+vnoremap <leader>ct :ChecklistToggleCheckbox<cr>
+vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+
+" auto save latex
+" Plug 'vim-scripts/vim-auto-save', { 'for': 'tex' }
+
+" tables
+Plug 'dhruvasagar/vim-table-mode'
+
+" ============================================================================
+" ============================================================================
+" =============================== [ colorschemes ] ===========================
+Plug 'junegunn/seoul256.vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'christophermca/meta5'
+Plug 'joshdick/onedark.vim'
+Plug 'chriskempson/tomorrow-theme'
+Plug 'ewilazarus/preto'
+Plug 'romainl/Apprentice'
+Plug 'Snazzyham/wwdc-2016'
+
+" ============================================================================
+" ============================================================================
+" ========================== [ miscellaneous ] ===============================
+" show how to hack!
+" Plug 'natw/keyboard_cat.vim' " fun!
+
+" encouraging quotes when opening vim
+Plug 'onur/vim-motivate'
+" ============================================================================
+" ============================================================================
+" ============================================================================
+call plug#end()
+" ============================================================================
+
+
+" =========================[ options ]========================================
+" neovim already has these enabled
+if !has('nvim')
+    syntax enable       "Enable syntax processing
+    filetype plugin on        "Load plugins
+    filetype plugin indent on " Language dependent indenting, might need for Linux
+    set autoindent
+    set backspace=indent,eol,start  " Fix delete not working in insert mode
+    set encoding=utf-8
+    set hlsearch        "Highlight all matches
+    set incsearch       "Lookahead search as characters are entered
+    set laststatus=2
+    set smarttab        "Use shiftwidths at left margin, tabstops everywhere else
+    set ttyfast         "Faster scrolling
+    set wildmenu        "Visual autocomplete for command menu
+endif
+set tabstop=4       "Number of visual spaces per <TAB>
+set softtabstop=4   "Number of spaces in tab when editing
+set shiftwidth=4
+set shiftround      "Always indent/outdent to nearest tabstop
+set expandtab       "Tabs are spaces
+set scrolloff=10     " always show n lines above or below cursor
+set number          "Show line numbers
+set showcmd         "Show command in bottom bar
+set cursorline      "Hightlight current line
+set lazyredraw
+set ruler
+set timeoutlen=1000
+set ttimeout
+set ttimeoutlen=100  "Typing timeout
+set matchtime=10
+" set hidden          "Open new buffer without saving current buffer
+"set undofile       "Undo even after exiting and reopening vim
+" set re=1            " old regex (doesn't work before 7.4)
+set termencoding=utf-8
+scriptencoding utf-8
+set wildmode=list:longest
+set showmatch       " Highlight matching [{( )}]
+set ignorecase      " Ignore case in all searches
+set smartcase       " Unless uppercase letters used
+set pastetoggle=<F2>
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+" set term=xterm-256color
+" set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set rtp+=/Users/Library/Fonts
+"Split windows to the right and to the bottom
+set splitright
+set splitbelow
+" " use universal clipboard as opposed to only '+' and/or '*'
+" set clipboard+=unnamedplus
+" " disable mouse except for help
+set mouse=h
+" git branch in statusline
+" set statusline+=%{fugitive#statusline()}
+" ============================================================================
+
+" =========================[ remaps ]========================================
+let mapleader = "\<Space>"
+" let mapleader = " "
+
+" remap accidental macro mapping when trying to quit
+nnoremap Q q
+nnoremap q <Nop>
+
+" [ moving lines and selections ]
+" nnoremap <c-k> :m-2<cr>==
+" nnoremap <c-j> :m+<cr>==
+" inoremap <c-j> <esc>:m+<cr>==gi
+" inoremap <c-k> <esc>:m-2<cr>==gi
+" " vnoremap <c-j> :m'>+<cr>gv=gv
+" " vnoremap <c-k> :m-2<cr>gv=gv
+" vnoremap <c-j> :m'>+<cr>gv
+" vnoremap <c-k> :m-2<cr>gv
+nnoremap ˚ :m-2<cr>==
+nnoremap ∆ :m+<cr>==
+inoremap ˚ <esc>:m-2<cr>==gi
+inoremap ∆ <esc>:m+<cr>==gi
+" vnoremap ∆ :m'>+<cr>gv=gv
+" vnoremap ˚ :m-2<cr>gv=gv
+vnoremap ˚ :m-2<cr>gv
+vnoremap ∆ :m'>+<cr>gv
+
+" moving windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" easy escape
+inoremap jk <Esc>l
+" similar behavior to C and D
+nnoremap Y y$
+" NOTE this removes behavior of K for documentation
+nnoremap K f<space>r<CR>
+
+" what does this do???
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+" recenter upon new search
+" nnoremap n nzz
+
+" Use \ to search for conflicts in files
+function! FindConflict()
+    try
+        /<<<<<<<
+    catch
+    endtry
 endfunction
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-function! LightLineFilename()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? g:lightline.fname :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+nnoremap \ :call FindConflict()<CR>
+
+" [ relative numbers ]
+" toggle between relative line numbers
+function! NumberToggle()
+    if(&relativenumber == 0)
+        set relativenumber
+    else
+        set norelativenumber
+    endif
+endfunc
+autocmd VimEnter * :call NumberToggle()
+nnoremap <C-n> :call NumberToggle()<cr>
+
+" relative in normal mode; absolute in insert mode
+" autocmd InsertEnter * :set number
+" autocmd InsertLeave * :set relativenumber
+" ============================================================================
+
+
+"==================== from Damian Conway =====================================
+"====[ Make arrow keys move visual blocks around ]=====================
+" runtime plugin/dragvisuals.vim
+" vmap <expr> <LEFT>  DVB_Drag('left')
+" vmap <expr> <RIGHT> DVB_Drag('right')
+" vmap <expr> <DOWN>  DVB_Drag('down')
+" vmap <expr> <UP>    DVB_Drag('up')
+" vmap <expr> D       DVB_Duplicate()
+" vmap <expr> <C-D>   DVB_Duplicate()
+" " Remove any introduced trailing whitespace after moving...
+" let g:DVB_TrimWS = 1
+
+"====[ Show when lines extend past column 80 ]========================
+" highlight ColorColumn ctermbg=magenta
+highlight ColorColumn ctermbg=gray
+function! MarkMargin (on)
+    if exists('b:MarkMargin')
+        try
+            call matchdelete(b:MarkMargin)
+        catch /./
+        endtry
+        unlet b:MarkMargin
+    endif
+    if a:on
+        let b:MarkMargin = matchadd('ColorColumn', '\%80v', 100)
+    endif
 endfunction
 
-" autoexpansion
-inoremap (<CR> (<CR>)<Esc>O
-inoremap (:<CR> (<CR>):<Esc>O
-inoremap (:<Space> ():h
-inoremap {<CR> {<CR>}<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
+augroup MarkMargin
+    autocmd!
+    autocmd  BufEnter *     :call MarkMargin(1)
+    autocmd  BufEnter *.vp* :call MarkMargin(0)
+augroup END
+"=============================================================================
+
+"====================[ filetype ]==============================================
+"Remove all trailing whitespace upon saving
+" autocmd BufWritePre *py,*c :%s/\s\+$//e
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfunc
+" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+autocmd FileWritePre * :call <SID>StripTrailingWhitespaces()
+
+" C
+autocmd FileType *.c set sw=2 ts=2 sts=2
+
+autocmd FileType make set noexpandtab ts=8 sw=8 sts=8
+" === Makefile modelines are by default only read from top/bottom 5 lines
+autocmd FileType make set modelines=0
+
+" markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+"==============================================================================
+
+
+"====================[ colorscheme ]============================================
+" this has to be outside of plug for some reason,
+" so it's easiest to put down here
+" colorscheme meta5 
+" set background=light
+" set background=dark
+colorscheme apprentice
