@@ -59,3 +59,40 @@ myip() {
   ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
   ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
+
+ls_snip() {
+list_snippets_for() {
+  egrep "^snippet|^#" ~/.vim/snippets/$1.snippets | awk '/^#/ {comment = comment $0} /^snippet/ {print $0 "\t\t" comment; comment=""}'
+}
+
+if [ "$1" == "" ]
+then
+  echo "You must specify at least one file type as an argument to ls_snip"
+  exit
+fi
+
+for filetype in "$@"
+do
+  echo `echo $filetype | awk '{print toupper($0)}'`
+  list_snippets_for $filetype
+  echo
+done
+}
+
+pyswitch2() {
+    echo 'Switching to Python2.'
+    export PATH=${PATH%:$HOME/anaconda/bin}
+    export PATH=${PATH%:$HOME/anaconda3/bin}
+    export PATH=$HOME/anaconda/bin:$PATH
+    path=($path)
+    # echo $PATH
+}
+
+pyswitch3() {
+    echo 'Switching to Python3.'
+    export PATH=${PATH%:$HOME/anaconda/bin}
+    export PATH=${PATH%:$HOME/anaconda3/bin}
+    export PATH=$HOME/anaconda3/bin:$PATH
+    path=($path)
+    # echo $PATH
+}
