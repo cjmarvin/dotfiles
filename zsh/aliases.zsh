@@ -1,7 +1,7 @@
 
 if [[ $IS_LINUX -eq 1 ]]; then
-    alias l="ls -al --color=always"
-    alias ll="ls -aFGhkl --color=always"
+    alias l="ls -Al --color=always"
+    alias ll="ls -AFGhkl --color=always"
     alias ls="ls -Fh --color=always"
 elif [[ $IS_MAC -eq 1 ]]; then
     alias l="ls -al"
@@ -17,8 +17,8 @@ alias untargz="tar -zxvf"
 
 # alias tmux='TERM=screen-256color-bce tmux'
 
-alias acat='less ~dotpath/aliases.zsh'
-alias fcat='less ~dotpath/functions.zsh'
+alias acat='vim -R ~dotpath/aliases.zsh ~dotpath/local.aliases.zsh'
+alias fcat='vim -R ~dotpath/functions.zsh'
 alias sz='source ~/.zshrc'
 
 # Remove all .git files from a folder
