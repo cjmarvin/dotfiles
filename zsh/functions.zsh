@@ -81,18 +81,24 @@ done
 
 pyswitch2() {
     echo 'Switching to Python2.'
-    export PATH=${PATH%:$HOME/anaconda/bin}
-    export PATH=${PATH%:$HOME/anaconda3/bin}
-    export PATH=$HOME/anaconda/bin:$PATH
-    path=($path)
-    # echo $PATH
+    path=("${(@)path:#~/anaconda/bin}")
+    path=("${(@)path:#~/anaconda3/bin}")
+    path=($HOME/anaconda/bin $path)
 }
 
 pyswitch3() {
     echo 'Switching to Python3.'
-    export PATH=${PATH%:$HOME/anaconda/bin}
-    export PATH=${PATH%:$HOME/anaconda3/bin}
-    export PATH=$HOME/anaconda3/bin:$PATH
-    path=($path)
-    # echo $PATH
+    path=("${(@)path:#~/anaconda/bin}")
+    path=("${(@)path:#~/anaconda3/bin}")
+    path=($HOME/anaconda3/bin $path)
 }
+
+remove-conda() {
+    echo 'Removing conda from PATH.'
+    path=("${(@)path:#$HOME/anaconda/bin}")
+    path=("${(@)path:#$HOME/anaconda3/bin}")
+}
+
+if [[ -f $dotpath/local.functions.zsh ]]; then
+    source $dotpath/local.functions.zsh 
+fi
