@@ -30,3 +30,7 @@ fi
 # fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# if [[ $IS_MAC -eq 1 && -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+#     source "${HOME}/.iterm2_shell_integration.zsh"
+# fi
